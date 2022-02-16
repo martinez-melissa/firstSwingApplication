@@ -3,39 +3,58 @@ package firstSwingApplication;
 import java.awt.Checkbox;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
-public class mainWindow extends JFrame{
+public class mainWindowGridLayout extends JFrame{
 	private static final long serialVersionUID = -3333346029456412223L;
 
 
-	public mainWindow() {
+	public mainWindowGridLayout() {
 		// déclaration du titre de la fenêtre
 		super("Accueil");
+		
 		// fermer la seule fenêtre avec fin du programme
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		// définition de la taille
 		this.setSize(new Dimension(600, 400));
+		
 		// placement de la fenêtre après sa définition de taille pour la centrer parfaitement
 		this.setLocationRelativeTo(null);
 		
 		// création d'un panneau
 		JPanel contentPane = (JPanel) this.getContentPane();
-		// stratégie de positionnement = en lignes (les uns à côté des autres
-		contentPane.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		// stratégie de positionnement = en lignes (les uns à côté des autres) (paramètre; centré avec espacement entre élém. 50px)
+		contentPane.setLayout(new GridLayout(2, 2, 10, 10));
+		
 		// ajouts de boutons
-		contentPane.add(new JButton("push me"));
-		contentPane.add(new JButton("click me"));		
+		JButton btnPushButton = new JButton("push me");
+			//fixer taille et positionnement dans la fenêtre (ne pas faire)
+			//btnPushButton.setBounds(200, 20, 160, 30);
+		contentPane.add(btnPushButton);
+		
+		JButton btnClickButton = new JButton("click me");
+		contentPane.add(btnClickButton);
+		
 		// ajout case à cocher
-		contentPane.add(new Checkbox("check me"));
+		JCheckBox chkCheckMeBox = new JCheckBox("ckeck me");
+		contentPane.add(chkCheckMeBox);
+		
+		
 		// ajout champs de saisie
-		contentPane.add(new JTextField("edit me"));
+		JTextField chTexteField = new JTextField("edit me:");
+		// contrôler une taille préférée
+		chTexteField.setPreferredSize(new Dimension (120, 30));
+		contentPane.add(chTexteField);
 		
 	
 	}
@@ -46,7 +65,7 @@ public class mainWindow extends JFrame{
 		UIManager.setLookAndFeel(new NimbusLookAndFeel());
 		
 		// démarrage de la fenêtre
-		mainWindow menu = new mainWindow();
+		mainWindowGridLayout menu = new mainWindowGridLayout();
 		menu.setVisible(true);
 		
 		
