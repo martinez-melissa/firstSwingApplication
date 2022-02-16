@@ -2,12 +2,18 @@ package firstSwingApplication;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
@@ -34,19 +40,24 @@ public class mainWindowBorderLayout extends JFrame{
 		// stratégie de positionnement = en lignes (les uns à côté des autres) (paramètre; centré avec espacement entre élém. 50px)
 		//contentPane.setLayout(new BorderLayout());
 		
-		// ajouts de boutons
-		JButton btnPushButton = new JButton("push me");
-			//fixer taille et positionnement dans la fenêtre (ne pas faire)
-			//btnPushButton.setBounds(200, 20, 160, 30);
-		contentPane.add(btnPushButton, BorderLayout.NORTH);
+		// ajout de la barre de menu
+		contentPane.add(creerToolBar(), BorderLayout.NORTH);
 		
 		JButton btnClickButton = new JButton("click me");
+			//fixer taille et positionnement dans la fenêtre (ne pas faire)
+			//btnClickButton.setBounds(200, 20, 160, 30);
 		btnClickButton.setPreferredSize(new Dimension(200, 0));
-		contentPane.add(btnClickButton, BorderLayout.WEST);
+		contentPane.add(btnClickButton, BorderLayout.EAST);
 		
-		// ajout case à cocher
-		JCheckBox chkCheckMeBox = new JCheckBox("ckeck me");
-		contentPane.add(chkCheckMeBox, BorderLayout.SOUTH);
+		// ajout d'une zone arborescence
+		JScrollPane scrollPane = new JScrollPane(new JTree());
+		scrollPane.setPreferredSize(new Dimension(150, 0));
+		contentPane.add(scrollPane, BorderLayout.WEST);
+		
+		
+		
+		// ajout barre de statue
+		contentPane.add(creerStatusBar(), BorderLayout.SOUTH);
 		
 		
 		// ajout champs de saisie
@@ -55,7 +66,45 @@ public class mainWindowBorderLayout extends JFrame{
 		chTexteField.setPreferredSize(new Dimension (120, 30));
 		contentPane.add(chTexteField);
 		
+		
+		
+	}
 	
+	// méthode de création de la barre de menu
+	private JToolBar creerToolBar() {
+		JToolBar toolBar = new JToolBar();
+		
+		JButton btnClickButton = new JButton("click me");
+		toolBar.add(btnClickButton);
+		
+		JCheckBox chkCheckMeBox = new JCheckBox("ckeck me");
+		toolBar.add(chkCheckMeBox);
+		
+		JTextField chTexteField = new JTextField("edit me:");
+		toolBar.add(chTexteField);
+		
+		return toolBar;
+	}
+	
+	// méthode de création de barre de statut
+	private JPanel creerStatusBar() {
+		
+		//création de la barre de statut
+		JPanel statusBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		
+		//création de 2 labels
+		JLabel lblStatus = new JLabel("coucou");
+		lblStatus.setPreferredSize(new Dimension(100, 30));
+		
+		JLabel lblStatus2 = new JLabel("ça va ?");
+		lblStatus2.setPreferredSize(new Dimension(100, 30));
+		
+		//ajout des labels dans la barre de statut
+		statusBar.add(lblStatus);
+		statusBar.add(lblStatus2);
+
+		
+		return statusBar;
 	}
 		
 	
